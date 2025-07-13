@@ -9,6 +9,7 @@ export default function Login() {
     const navigate=useNavigate()
     const [emailId, setEmail] = useState("harshit@gmail.com")
     const [password, setPassword] = useState("Harshit@123")
+    const [ errorMessage, setError] = useState("")
     const dispatch= useDispatch()
     function handleEmailChange(e) {
         setEmail(e.target.value)
@@ -29,7 +30,10 @@ export default function Login() {
             navigate("/")
         }
         catch (err) {
-            console.log(err)
+            //  setError(err.reponse.data)
+            let errorMsg=err.response.data
+            setError(errorMsg)
+            console.log(err.response.data)
         }
     }
 
@@ -44,6 +48,7 @@ export default function Login() {
                         <span className='label-text'>Password</span>
                         <input value={password} type='text' placeholder="Password" className="input input-primary my-2" onChange={(e) => handlepasswordchange(e)} />
                     </div>
+                    <p className='text-red-500'>{errorMessage}</p>
                     <div className="card-actions justify-center">
                         <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#ed2a6b] text-white text-base font-bold leading-normal tracking-[0.015em]" onClick={handleLogin}>Login</button>
                     </div>
