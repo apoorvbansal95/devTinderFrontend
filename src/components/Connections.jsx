@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function Connections() {
     const allconnections= useSelector((store)=>store.connection)
-    console.log(allconnections)
     const dispatch= useDispatch()
     const getfriend=async()=>{
 
         try{
             const friends= await axios.get(BASE_URL+"/user/requests/friends", {withCredentials:true})
-            // console.log(friends.data.data)
             dispatch(addConnections(friends.data.data))
         
         }catch(err){
