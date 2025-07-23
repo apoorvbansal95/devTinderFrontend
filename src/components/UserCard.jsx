@@ -1,15 +1,17 @@
 import React from 'react'
 import { BASE_URL } from '../utils/constant'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { removeUserFromFeed } from '../utils/feedSlice'
 
 export default function UserCard({user}) {
-    console.log(user)
     const {firstName, lastName, photo, age, about, gender, skills}=user
-
-    const handleSendRequest= async(status, to_usedid)=>{
+    const dispatch=useDispatch()
+    const handleSendRequest= async(status, to_userid)=>{
       try{
-        const res=await axios.post(BASE_URL+"/request/send/"+status+"/"+to_usedid, {}, {withCredentials:true})
+        const res=await axios.post(BASE_URL+"/request/send/"+status+"/"+to_userid, {}, {withCredentials:true})
         console.log(res.data)
+        dispatch(removeUserFromFeed(to_userid))    // to remove user after taking action usercard
       }
       catch(err){
         console.log(err)
