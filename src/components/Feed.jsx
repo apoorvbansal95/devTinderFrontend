@@ -28,24 +28,29 @@ useEffect(() => {
 }, []);
 
 if (!feed) return 
-if (feed.length<=0) return <h1 className='justify-center  flex my-10'> No more matches found</h1>
+if (feed.length<=0) return <h1 className='justify-center flex my-10'> No more matches found</h1>
 
   return feed && (
-   <div className='flex justify-center my-10'>
-    {/* <UserCard user={feed[0]}/> */}
-    <AnimatePresence>
-  {feed.length > 0 && (
-    <motion.div
-      key={feed[0]._id}
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.3 }}
-    >
-      <UserCard user={feed[0]} />
-    </motion.div>
-  )}
-</AnimatePresence>
-   </div>
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
+      <div className="w-full max-w-lg mt-16">
+        <AnimatePresence>
+          {feed.length > 0 && (
+            <motion.div
+              key={feed[0]._id}
+              initial={{ opacity: 0, scale: 0.95, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -40 }}
+              transition={{ duration: 0.4, type: 'spring' }}
+              className="shadow-2xl rounded-2xl bg-gray-800/90 backdrop-blur-lg p-6 border border-gray-700"
+            >
+              <UserCard user={feed[0]} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {feed.length <= 0 && (
+          <h1 className="text-2xl font-bold text-gray-400 text-center mt-20">No more matches found</h1>
+        )}
+      </div>
+    </div>
   )
-} 
+}

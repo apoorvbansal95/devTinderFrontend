@@ -26,10 +26,14 @@ export default function NavBar() {
           <Link to="/" className="btn btn-ghost text-xl">🧑‍💻DevTinder</Link>
         </div>
         <div className="flex gap-2">
-           {user &&<p>Welcome {user.firstName}</p>}
+          {user && (
+            <p className="text-pink-400 font-bold text-lg px-4 py-2 rounded-full bg-gradient-to-r from-purple-700 via-pink-600 to-blue-700 shadow-md animate-fade-in">
+              Welcome, {user.firstName}!
+            </p>
+          )}
           {user && <div className="dropdown dropdown-end mx-4">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-             
+
               <div className="w-10 rounded-full">
                 <img
                   alt="User_profile"
